@@ -4,7 +4,7 @@ from io import BytesIO
 from PIL import Image
 from app.common import bot_db
 from app.config import DEBUG_map_api
-import urllib
+# import urllib
 
 #функция для получения адреса по координатам
 def get_address_from_coords(coords):
