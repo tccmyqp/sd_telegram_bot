@@ -37,33 +37,32 @@ logger.disable('__main__')
 
 # выполняется при запуске бота
 async def on_startup():
-    try:
-        logger.info("on_startup") # вывод инфо
+    
+    logger.info("on_startup") # вывод инфо
+    
+    bot_db.update_poll_names()
+    
+    if bot_db.user_exists(user_id=0):
+        logger.info("user 0 exist")
+        bot_db.del_user(user_id=0)
+        logger.info("user 0 deleted")
+        bot_db.print_table(table_name='users')
+    else:
+        logger.info("user 0 not exist")
+        bot_db.add_user(user_id=0, first_name='test_first_name', username='test_username', language_code='ru')
+        logger.info("'user 0 added")
+        bot_db.print_table(table_name='users')        
         
-        bot_db.update_poll_names()
-        
-        if bot_db.user_exists(user_id=0):
-            logger.info("user 0 exist")
-            bot_db.del_user(user_id=0)
-            logger.info("user 0 deleted")
-            bot_db.print_table(table_name='users')
-        else:
-            logger.info("user 0 not exist")
-            bot_db.add_user(user_id=0, first_name='test_first_name', username='test_username', language_code='ru')
-            logger.info("'user 0 added")
-            bot_db.print_table(table_name='users')        
-            
-        # print('registered:', registered_users)
-        register_handlers_exception(dp)  # регистрация хендлеров
-        register_handlers_common_cmd(dp)  # регистрация хендлеров
-        register_handlers_admin_cmd(dp)  # регистрация хендлеров    
-        register_handlers_polls()
+    # print('registered:', registered_users)
+    register_handlers_exception(dp)  # регистрация хендлеров
+    register_handlers_common_cmd(dp)  # регистрация хендлеров
+    register_handlers_admin_cmd(dp)  # регистрация хендлеров    
+    register_handlers_polls()
                 
-        await set_start_commands(bot)  # Установка команд бота
-        await dp.skip_updates() # пропуск обновлений
-        await dp.start_polling() # старт полинга
-    except asyncio.TimeoutError:
-        print('asyncio timeout!')
+    await set_start_commands(bot)  # Установка команд бота
+    await dp.skip_updates() # пропуск обновлений
+    await dp.start_polling() # старт полинга
+
     
 
 if __name__ == '__main__':
