@@ -9,7 +9,7 @@ ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 dotenv_path = os.path.join(os.getcwd(), '.env')
 
 if os.path.exists(dotenv_path):
-    print('exist')
+    print('dotenv file found')
     load_dotenv(dotenv_path)
     
 DEBAG_db = False
