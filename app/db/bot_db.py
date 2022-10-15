@@ -1,19 +1,20 @@
-import sqlite3
 import os
-import sys
 import re
-# from app.config import db_name, sql_create_path
-from app.strings import data_polls
-from app.config import DEBAG_db, db_name, sql_create_name
+import sqlite3
+import sys
 
 from app.common import logger
+from app.config import DEBAG_db, db_name, sql_create_name
+# from app.config import db_name, sql_create_path
+from app.strings import data_polls
+
 logger.add(sys.stderr, level="ERROR")
 
 if not DEBAG_db:
     logger.disable("app.db.bot_db")
 
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
-db_path = os.path.join(ROOT_DIR, db_name)
+db_path = os.path.join(ROOT_DIR, db_name)  # type: ignore
 sql_create_path = os.path.join(ROOT_DIR, sql_create_name)
 
 class BotDB:
@@ -40,7 +41,7 @@ class BotDB:
                 self.create_new()   
         except:
             e = sys.exc_info()[1]
-            logger.exception(f'init: {e.args[0]}')
+            logger.exception(f'init: {e.args[0]}')# type: ignore
         finally:
             self.db_stop()        
         
@@ -80,7 +81,7 @@ class BotDB:
             
         except:
             e = sys.exc_info()[1]
-            logger.exception(f'update_poll_names: {e.args[0]}')
+            logger.exception(f'update_poll_names: {e.args[0]}')# type: ignore
               
         finally:
             self.db_stop()            
@@ -96,7 +97,7 @@ class BotDB:
             ret = [i[0] for i in res]
         except:
             e = sys.exc_info()[1]
-            logger.exception(f'get_poll_ids: {e.args[0]}')
+            logger.exception(f'get_poll_ids: {e.args[0]}')# type: ignore
         else:
             return ret
         finally:
@@ -116,7 +117,7 @@ class BotDB:
             self.db_stop()
         except:
             e = sys.exc_info()[1]
-            logger.exception(f'create_new: {e.args[0]}')
+            logger.exception(f'create_new: {e.args[0]}')# type: ignore
         finally:
             self.db_stop()
     
@@ -129,7 +130,7 @@ class BotDB:
             self.db_stop()
         except:
             e = sys.exc_info()[1]
-            logger.exception(f'clear_poll_results: {e.args[0]}')
+            logger.exception(f'clear_poll_results: {e.args[0]}')# type: ignore
         finally:
             self.db_stop()        
         
@@ -142,7 +143,7 @@ class BotDB:
             self.db_stop()
         except:
             e = sys.exc_info()[1]
-            plogger.exception(f'user_exists: {e.args[0]}')
+            logger.exception(f'user_exists: {e.args[0]}')# type: ignore
         else:    
             return ret
         finally:
@@ -157,7 +158,7 @@ class BotDB:
             self.db_stop()
         except:
             e = sys.exc_info()[1]
-            logger.exception(f'poll_data_exist: {e.args[0]}')
+            logger.exception(f'poll_data_exist: {e.args[0]}')# type: ignore
         else:    
             return ret
         finally:
@@ -171,7 +172,7 @@ class BotDB:
             self.db_stop()
         except:
             e = sys.exc_info()[1]
-            logger.exception(f'check_user_poll: {e.args[0]}')
+            logger.exception(f'check_user_poll: {e.args[0]}')# type: ignore
         else:    
             return result
         finally:
@@ -193,7 +194,7 @@ class BotDB:
             self.db_stop()
         except:
             e = sys.exc_info()[1]
-            logger.exception(f'set_poll_result: {e.args[0]}')
+            logger.exception(f'set_poll_result: {e.args[0]}')# type: ignore
         finally:
             self.db_stop()  
               
@@ -207,7 +208,7 @@ class BotDB:
                 self.db_stop()
         except:
             e = sys.exc_info()[1]
-            logger.exception(f'add_user: {e.args[0]}')
+            logger.exception(f'add_user: {e.args[0]}')# type: ignore
         finally:
             self.db_stop()
             
@@ -221,7 +222,7 @@ class BotDB:
             self.db_stop()
         except:
             e = sys.exc_info()[1]
-            logger.exception(f'del_user: {e.args[0]}')
+            logger.exception(f'del_user: {e.args[0]}')# type: ignore
         finally:
             self.db_stop()
             
@@ -234,7 +235,7 @@ class BotDB:
             self.db_stop()
         except:
             e = sys.exc_info()[1]
-            logger.exception(f'change_fmt_state: {e.args[0]}')          
+            logger.exception(f'change_fmt_state: {e.args[0]}')          # type: ignore
         finally:
             self.db_stop()
             
@@ -247,7 +248,7 @@ class BotDB:
             self.db_stop()
         except:
             e = sys.exc_info()[1]
-            logger.exception(f'set_phone: {e.args[0]}')           
+            logger.exception(f'set_phone: {e.args[0]}')           # type: ignore
         finally:
             self.db_stop()
             
@@ -259,7 +260,7 @@ class BotDB:
             self.db_stop()
         except:
             e = sys.exc_info()[1]
-            logger.exception(f'get_table: {e.args[0]}')
+            logger.exception(f'get_table: {e.args[0]}')# type: ignore
         else:    
             return res       
         finally:
@@ -270,12 +271,12 @@ class BotDB:
         try:
             res = self.get_table(table_name)
             print(f'таблица {table_name}:')
-            for item in res:
+            for item in res: # type: ignore
                 print(item)
             print()
         except:
             e = sys.exc_info()[1]
-            logger.exception(f'print_table: {e.args[0]}')           
+            logger.exception(f'print_table: {e.args[0]}')           # type: ignore
                      
     def registered_user(self, user_id):
         logger.info('DB')  
@@ -286,7 +287,7 @@ class BotDB:
             self.db_stop()
         except:
             e = sys.exc_info()[1]
-            logger.exception(f'registered_user: {e.args[0]}')
+            logger.exception(f'registered_user: {e.args[0]}')# type: ignore
         else:    
             return ret
         finally:
@@ -300,7 +301,7 @@ class BotDB:
             ret = [i[0] for i in res]
         except:
             e = sys.exc_info()[1]
-            logger.exception(f'get_registered_users: {e.args[0]}')
+            logger.exception(f'get_registered_users: {e.args[0]}')# type: ignore
         else:    
             return ret
         finally:
@@ -315,7 +316,7 @@ class BotDB:
             self.db_stop()
         except:
             e = sys.exc_info()[1]
-            logger.exception(f'get_poll_results_data: {e.args[0]}')
+            logger.exception(f'get_poll_results_data: {e.args[0]}')# type: ignore
         else:    
             return ret
         finally:
