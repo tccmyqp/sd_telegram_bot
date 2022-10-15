@@ -1,9 +1,16 @@
 import os
-import sys
 import re
+import sys
+from importlib import import_module
 
+from aiogram import Bot, Dispatcher, types
+from aiogram.contrib.fsm_storage.memory import MemoryStorage
+from aiogram.types import BotCommand
 from loguru import logger
 
+from app.config import token
+from app.db.bot_db import bot_db
+from app.strings import data_polls, data_strings
 
 # level_per_module = {
 #     "": "INFO",
@@ -16,17 +23,6 @@ from loguru import logger
 # logger.add(sys.stderr, level="ERROR", filter='DEBUG') 
 # logger.add(sys.stdout, format="{time} - {level} - {message}", filter="app.common")
 
-from importlib import import_module
-from aiogram.types import BotCommand
-from aiogram import Bot, Dispatcher
-from app.config import token
-from aiogram.contrib.fsm_storage.memory import MemoryStorage
-from app.strings import data_strings, data_polls
-from app.db.bot_db import bot_db
-from aiogram import types
-
-
-
 # fmt = "{time}"
 # fmt = "{time} - {name} - {level} - {message}"
 # logger.add(level="DEBUG", format=fmt)
@@ -34,7 +30,7 @@ from aiogram import types
 
 storage = MemoryStorage()
 
-bot = Bot(token=token, parse_mode=types.ParseMode.HTML)
+bot = Bot(token=token, parse_mode=types.ParseMode.HTML)  # type: ignore
 dp = Dispatcher(bot, storage=storage)
 registered_users = bot_db.get_registered_users()
 
