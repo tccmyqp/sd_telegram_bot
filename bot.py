@@ -1,17 +1,16 @@
 # import sys
-import asyncio
 # import unittest
+
+import asyncio
 from random import randint
 
+from app.common import (bot, dp, logger, register_handlers_polls,
+                        registered_users, set_start_commands)
+from app.db.bot_db import bot_db
 from app.handlers.admin_cmd import register_handlers_admin_cmd
 from app.handlers.common_cmd import register_handlers_common_cmd
 from app.handlers.exception import register_handlers_exception
 
-
-from app.db.bot_db import bot_db
-from app.common import bot, dp, register_handlers_polls, set_start_commands, registered_users
-
-from app.common import logger
 logger.disable('__main__')
 # from logging import StreamHandler
 # logger.add(StreamHandler(sys.stderr), format="{message}")
