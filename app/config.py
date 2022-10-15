@@ -5,8 +5,11 @@ from dotenv import load_dotenv
 
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 
-dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
+
+dotenv_path = os.path.join(os.getcwd(), '.env')
+
 if os.path.exists(dotenv_path):
+    print('exist')
     load_dotenv(dotenv_path)
     
 DEBAG_db = False
@@ -14,15 +17,16 @@ DEBUG_map_api = False
 DEBUG_functions = False
 
 token = os.environ.get('telegram_bot_token') # telegram bot token
-admin_ids = os.environ.get('telegram_admin_ids') # [111111111, 222222222]
+
+admin_ids = os.environ.get('telegram_admin_ids').split(',') # type: ignore # '111111111,222222222' -> [111111111,222222222] 
 MAP_API_TOKEN = os.environ.get('MAP_API_TOKEN') # yandex map api tiken
 db_name = os.environ.get('sqlite_db_name') # 'clear_base.db', 'work_base.db'
 
-WEBHOOK_HOST = os.environ.get('WEBHOOK_HOST') # ngrok, внешний ip
-WEBHOOK_PORT = os.environ.get('WEBHOOK_PORT') # 443, 80, 88 или 8443 (порт должен быть открыт!)
-WEBHOOK_LISTEN = os.environ.get('WEBHOOK_LISTEN') # 127.0.0.1
-WEBHOOK_SSL_CERT = os.environ.get('WEBHOOK_SSL_CERT') # Путь к сертификату
-WEBHOOK_SSL_PRIV = os.environ.get('WEBHOOK_SSL_PRIV') # Путь к приватному ключу
+# WEBHOOK_HOST = os.environ.get('WEBHOOK_HOST') # ngrok, внешний ip
+# WEBHOOK_PORT = os.environ.get('WEBHOOK_PORT') # 443, 80, 88 или 8443 (порт должен быть открыт!)
+# WEBHOOK_LISTEN = os.environ.get('WEBHOOK_LISTEN') # 127.0.0.1
+# WEBHOOK_SSL_CERT = os.environ.get('WEBHOOK_SSL_CERT') # Путь к сертификату
+# WEBHOOK_SSL_PRIV = os.environ.get('WEBHOOK_SSL_PRIV') # Путь к приватному ключу
 
 
 dir_path = Path.cwd()
