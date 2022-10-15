@@ -29,7 +29,7 @@ db_name = os.environ.get('sqlite_db_name') # 'clear_base.db', 'work_base.db'
 # WEBHOOK_SSL_PRIV = os.environ.get('WEBHOOK_SSL_PRIV') # Путь к приватному ключу
 
 
-dir_path = Path.cwd()
+# dir_path = Path.cwd()
 
 sql_create_name = 'create_db.sql'
 
