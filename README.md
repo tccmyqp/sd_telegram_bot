@@ -37,9 +37,8 @@
     app/strings.py              загрузка строковых данных из strings.json в соответствующие структуры
     
     app/db/bot_db.py            реализация работы с базой данных
-    app/db/base.db              база данных
+    app/db/clear_base.db        чистая база данных
     app/db/create_db.sql        скрипт создания структуры базы данных
-    app/db/sqlite_db.py         не используется
 
     app/handlers/admin_cmd.py   команды админа и их логика, принимаемые ботом
     app/handlers/common_cmd.py  общие команды и их логика, принимаемые ботом
@@ -50,3 +49,10 @@
 
     app/polls/poll_name/poll_handlers.py    команды данного голосования и их логика
     app/polls/poll_name/poll_strings.json   строковые данные данного голосования
+
+Переменные окружения:
+
+    telegram_bot_token = ''
+    telegram_admin_ids = '111111111,222222222'
+    MAP_API_TOKEN = ''
+    sqlite_db_name = 'clear_base.db'
