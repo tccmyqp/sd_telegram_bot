@@ -34,7 +34,7 @@ class BotDB:
             self.cursor.execute("SELECT count(*) FROM sqlite_master WHERE type='table' AND name='poll_results'")
             res3 = self.cursor.fetchone()
             
-            if self.connect: self.connect.close()
+            # if self.connect: self.connect.close()
             
             if not res1 or not res2 or not res2 :
                 logger.warning(f'нет таблицы:, {res1}, {res2}, {res3}')
@@ -49,11 +49,13 @@ class BotDB:
         return ''.join( chr for chr in table_name if chr.isalnum() or chr=='_')
         
     def db_start(self):
-        self.connect = sqlite3.connect(self.db_path)
-        self.cursor = self.connect.cursor()
+        pass
+        # self.connect = sqlite3.connect(self.db_path)
+        # self.cursor = self.connect.cursor()
     
     def db_stop(self):
-        if self.connect: self.connect.close()
+        pass
+        # if self.connect: self.connect.close()
     
     # обновляем названия голосований в базе
     def update_poll_names(self):
