@@ -1,7 +1,12 @@
 # import importlib
 # from fnmatch import fnmatch
-import os, re, json, pathlib
+import json
+import os
+import pathlib
+import re
+
 from app.config import ROOT_DIR
+
 # from dacite import from_dict
 # from app.classes import poll_list, str_data
 
@@ -28,9 +33,6 @@ for name in dirs:
     # сохраним данные в json
     # with open(os.path.join(path, name, 'poll_strings.json'), 'w', encoding='utf-8') as f:
     #json.dump(module.data, f, indent=2, ensure_ascii=False)
-
-
-
 
 
 # сохраняем strings.json
